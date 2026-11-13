@@ -53,6 +53,14 @@ WHERE boroname = 'The Bronx';
 
 
 
+-- Note: I don't think this is functioning properly because
+-- a general calculation of ST_NumInteriorRings(geom) returns
+-- only null types.
+SELECT
+    COUNT(*) AS no_hole_polygons
+FROM nyc_census_blocks
+WHERE ST_NumInteriorRings(geom) = 0;
+
 
 -- Exercise 4: What is the total length of streets (in miles) in New York City?
 -- Expected output: one row with total street length in miles
@@ -67,7 +75,9 @@ WHERE boroname = 'The Bronx';
 
 -- TODO: Write your query below
 
-
+SELECT
+    SUM(ST_Length(geom)) / 1609.34 AS total_length_miles
+FROM nyc_streets;
 
 
 -- Exercise 5: How long is '5th Ave' in meters?
