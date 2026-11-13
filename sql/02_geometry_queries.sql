@@ -31,6 +31,10 @@ WHERE name = 'New Brighton';
 
 -- TODO: Write your query below
 
+SELECT 
+    ST_Area(ST_Union(geom)) / 4046.86 AS bronx_area_acres
+FROM nyc_neighborhoods
+WHERE boroname = 'The Bronx';
 
 
 
