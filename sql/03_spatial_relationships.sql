@@ -54,6 +54,16 @@ WHERE ST_Intersects(
 
 -- TODO: Write your query below
 
+SELECT st.name
+FROM nyc_streets as st
+WHERE st.name != 'Queensboro Brg' AND ST_Intersects(
+    st.geom,
+    (
+        SELECT geom AS queensboro
+        FROM nyc_streets
+        WHERE name = 'Queensboro Brg'
+    )
+);
 
 
 
