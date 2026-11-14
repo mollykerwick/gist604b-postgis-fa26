@@ -79,5 +79,16 @@ WHERE st.name != 'Queensboro Brg' AND ST_Intersects(
 
 -- TODO: Write your query below
 
-
+SELECT
+    SUM(cn.popn_total) AS total_population
+FROM nyc_census_blocks as cn
+WHERE ST_DWithin(
+    cn.geom,
+    (
+        SELECT geom AS queensboro
+        FROM nyc_streets
+        WHERE name = 'Queensboro Brg'
+    ),
+    50
+);
 
